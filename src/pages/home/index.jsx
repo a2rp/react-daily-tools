@@ -1,69 +1,41 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { Styled } from './styled'
-import { NavLink } from 'react-router-dom'
+import { createElement } from "react";
+import { MdArrowForward, MdTimer, MdWavingHand } from "react-icons/md";
+import { NavLink } from "react-router-dom";
+import { Styled } from "./styled";
 
-const Home = () => {
-    return (
-        <Styled.Wrapper>
-            <Styled.Main>
-                <ul className='appsList'>
-                    <li><NavLink to="/hello-world">Hello World</NavLink></li>
-                    <li><NavLink to="/stopwatch">Stopwatch</NavLink></li>
-                </ul>
+const tools = [
+    { to: "/hello-world", title: "Hello World", description: "A small route to verify the app shell and navigation.", icon: MdWavingHand, tag: "Starter" },
+    { to: "/stopwatch", title: "Stopwatch", description: "Track elapsed time with start, pause, reset and lap actions.", icon: MdTimer, tag: "Utility" },
+];
 
-                <Styled.AboutWrapper>
-                    <p>
-                        I'm Ashish Ranjan, a full-stack JavaScript developer based in Bengaluru, India. I design and build web products that feel effortless-fast frontends, dependable APIs, and clean DevOps-so teams can ship more in less time.
-                    </p>
-                    <p>
-                        My core stack is React (Vite) + Node/Express + MongoDB, styled with styled-components, integrated with Cloudinary and Stripe/Razorpay, and deployed via GitHub Pages/Actions, Netlify, Render, or Firebase.
-                    </p>
+const Home = () => (
+    <Styled.Wrapper>
+        <Styled.Hero>
+            <span className="eyebrow">A SMALL TOOLBOX FOR EVERYDAY WORK</span>
+            <h1>Useful tools, kept simple.</h1>
+            <p>React Daily Tools is a compact collection of focused frontend experiments that are easy to open, understand and use.</p>
+            <NavLink className="primaryButton" to="/stopwatch">Open stopwatch <MdArrowForward aria-hidden="true" /></NavLink>
+        </Styled.Hero>
+        <Styled.Section>
+            <div className="sectionHeader"><div><span className="eyebrow">AVAILABLE NOW</span><h2>Pick a tool</h2></div><span className="count">{tools.length} tools</span></div>
+            <div className="toolGrid">
+                {tools.map(({ to, title, description, icon: Icon, tag }) => (
+                    <NavLink to={to} className="toolCard" key={to}>
+                        <div className="icon">{createElement(Icon, { "aria-hidden": true })}</div>
+                        <span className="tag">{tag}</span>
+                        <h3>{title}</h3>
+                        <p>{description}</p>
+                        <span className="cardLink">Open tool <MdArrowForward aria-hidden="true" /></span>
+                    </NavLink>
+                ))}
+            </div>
+        </Styled.Section>
+        <Styled.About>
+            <span className="eyebrow">ABOUT THE COLLECTION</span>
+            <h2>Small interfaces, practical lessons.</h2>
+            <p>Each route is intentionally lightweight and responsive, making this repository a place to explore reusable React patterns and everyday UI details.</p>
+        </Styled.About>
+    </Styled.Wrapper>
+);
 
-                    <h3>What I bring</h3>
-                    <ul>
-                        <li>Component systems that scale, with type-safety where it helps and docs where it counts</li>
-                        <li>Backend routes that are clean, validated, and production-safe</li>
-                        <li>CI/CD pipelines that make releases boring (the good kind)</li>
-                    </ul>
-                    <p>When I'm not shipping, I experiment with AI/automation and share notes to help devs move faster. If you value clarity, speed, and maintainability, let's build something great.</p>
-
-                    <h3>Skills & Tools</h3>
-                    <ul>
-                        <li>Frontend: React, Vite, React Router, styled-components, AOS/GSAP</li>
-                        <li>Backend: Node.js, Express.js, REST APIs, JWT auth, validation</li>
-                        <li>Database/Infra: MongoDB, Mongoose, Cloudinary
-                        </li>
-                        <li>Payments: Stripe, Razorpay
-                        </li>
-                        <li>DevOps/CI/CD: Git/GitHub, GitHub Actions, Netlify, Render, GitHub Pages
-                        </li>
-                    </ul>
-
-                    <h3>Quick Highlights</h3>
-                    <ul>
-                        <li>Ships SEO-friendly, mobile-first interfaces</li>
-                        <li>Sets up GitHub Actions for automatic deploys</li>
-                        <li>Integrates Stripe/Razorpay with real-world flows</li>
-                    </ul>
-
-                    <h3>Contact</h3>
-                    <ul>
-                        <li>Email: ash.ranjan09@gmail.com</li>
-                        <li>Portfolio: <a href="https://www.ashishranjan.net" target='_blank'>https://www.ashishranjan.net</a></li>
-                        <li>GitHub: <a href="https://github.com/a2rp" target='_blank'>https://github.com/a2rp</a></li>
-                        <li>LinkedIn: <a href="https://www.linkedin.com/in/aashishranjan/" target="_blank">https://www.linkedin.com/in/aashishranjan/</a></li>
-                        <li>Phone: +91 8123747965</li>
-                    </ul>
-
-                    <h3>SEO Meta Description</h3>
-                    <p>
-                        Full-stack dev in Bengaluru building fast, SEO-friendly React+Node apps with secure APIs and CI/CD. <br />
-                        <b>Open to full-time roles and freelance.</b>
-                    </p>
-                </Styled.AboutWrapper>
-            </Styled.Main>
-        </Styled.Wrapper>
-    )
-}
-
-export default Home
+export default Home;

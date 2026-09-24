@@ -1,17 +1,19 @@
 {
-    "name": "frontend",
+    "name": "react-daily-tools",
     "private": true,
-    "version": "0.0.0",
+    "version": "1.0.0",
     "type": "module",
+    "description": "A compact collection of useful React frontend tools.",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
         "lint": "eslint .",
         "preview": "vite preview",
-        "postbuild": "cp dist/index.html dist/404.html || copy dist\\index.html dist\\404.html",
+        "postbuild": "node -e \"require('fs').copyFileSync('dist/index.html','dist/404.html')\"",
         "predeploy": "npm run build",
         "deploy": "npx gh-pages -d dist -b gh-pages"
     },
+    "homepage": "https://a2rp.github.io/react-daily-tools/",
     "dependencies": {
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.1",
